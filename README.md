@@ -1,29 +1,76 @@
-Djeser Kordon 
+
+Djeser Kordon
 Wei Liu
+# Résultats
+Nous avons fait l'analyse des resultats des deux methodes dans le fichier analyser resultat. 
+## Exec time / RAM
 
-# Alignment free - TP 1
+k = 21
 
-L'objectif du TP est de comparer 5 especes de bactéries entre elles.
-Vous trouverez les données en suivant [ce lien](https://we.tl/t-WeWvheBBGX)
+### dictionnaires
 
-## Composer le TP
+```
+/usr/bin/time -v python3 main.py 
+index
+GCF_000006945.2_ASM694v2_genomic.fna GCF_008244785.1_ASM824478v1_genomic.fna 0.9377423900044074 (0.9599864198488329, 0.9758858885062132)
 
-Vous devez forker ce projet puis compléter ses fonctions.
-Le rendu sera le dépot git dans lequel vous aurrez forké.
+	Command being timed: "python3 main.py"
+	User time (seconds): 9.72
+	System time (seconds): 0.29
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:10.02
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 934072
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 308576
+	Voluntary context switches: 1
+	Involuntary context switches: 84
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
 
-Le but est d'obtenir toutes les distances paire à paire des différentes bactéries.
-Vous pouvez modifier l'affichage final pour obtenir une matrice d'adjacence si vous les souhaitez.
 
-En observant les distances obtenues, que pouvez-vous dire des espèces présentes dans cet échantillon ?
+```
 
-## Remarque sur le TME
- 
-Nous avons un problème dans le TME. Le premier est que la fonction est que l'on utilise ne compte pas les doublons ce qui fait qu'une valeur qui va apparaître plusieurs fois dans les deux listes fois va être compté Une seule fois dans le inter. Nous avons essayé une autre méthode (v2) pour calculer le inter mais elles ont des temps d'exécutions plus longs. Sachant que les différences sont inférieures à 1%.
- 
-Nous avons essayé de voir si d'autre méthode faisait que l'on avait des résultats différents et nous sommes arrivés à la conclusion que c'est le calcul du inter qui crée les différences de résultats. La deuxième méthode n'utilisant pas la fonction native de python, nous aurions tendance à plus lui faire confiance mais l'execution est plus longue.
+### Listes
 
-ps: En fonction de l'OS, les fichiers ne sortent pas dans le même ordre. 
- 
-## interpretation des resultats
- 
-nous ne savons pas trop quoi dire des résultats. On a aucune information sur les espèces ainsi que leurs liens de parentés. On peut émettre des hypothèses en se basant sur les résultats mais on pourra juste les citer.Le coefficient (ou indice) de similarité de Jaccard est utilisé pour comparer la similarité entre deux ensembles donc dans notre cas, les deux ensemble de Kmer. et le coefficient de similitude la quantité d'un des ensembles dans le inter
+```
+/usr/bin/time -v python3 main.py 
+lists
+GCF_000006945.2_ASM694v2_genomic.fna GCF_008244785.1_ASM824478v1_genomic.fna 0.9377423900044074 (0.9599864198488329, 0.9758858885062132)
+
+	Command being timed: "python3 main.py"
+	User time (seconds): 9.04
+	System time (seconds): 0.16
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:09.20
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 567176
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 163235
+	Voluntary context switches: 1
+	Involuntary context switches: 70
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+```
+
